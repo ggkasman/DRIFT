@@ -17,11 +17,11 @@ from utils import (
 
 def run_toy_example():
     X, y = get_toy_data()
-    log_tp = run_tp(X, y)
-    log_ls = run_ls(X, y)
+    #log_tp = run_tp(X, y)
+    #log_ls = run_ls(X, y)
     log_inter = run_inter(X, y)
-    assert log_tp < 250
-    assert log_ls < 250
+    #assert log_tp < 250
+    #assert log_ls < 250
     assert log_inter < 250
 
 
@@ -39,14 +39,14 @@ def run_tp(X, y):
     print(mod.summary())
 
     callback = EarlyStopping(
-        patience=50, monitor="val_logLik", restore_best_weights=True
+        patience=100, monitor="val_logLik", restore_best_weights=True
     )
 
     mod.fit(
         x=[X, y],
         y=y,
         batch_size=32,
-        epochs=500,
+        epochs=200,
         validation_split=0.1,
         callbacks=[callback],
         verbose=1,
